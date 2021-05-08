@@ -17,8 +17,8 @@ class NorthwindMain
 
     def initialize(params = {})
         initialize_directories
-    
 
+        # TODO-fga: Integrate with DB
         # @@database = Database.new(params.fetch(:Database, {}))
         @@server = NorthwindServer.new(params.fetch(:ServerPort, 8080))
     end

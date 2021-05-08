@@ -5,10 +5,6 @@ require_relative "#{Dir.pwd}/routes/orders.rb"
 class NorthwindServer
     attr_accessor :port, :server
 
-    # include Sinatra::Templates
-    # include Sinatra::Helpers
-    # include Sinatra::ContentFor
-
     def initialize(port)
         @@port = port
 
@@ -27,7 +23,6 @@ class NorthwindServer
     private
     def load_routes
         @@server.get '/' do
-            # binding.pry
             erb :default_index
         end
 
@@ -37,22 +32,24 @@ class NorthwindServer
             action = reqBody['action']
 
             case action.downcase
-                
+                # TODO-fga: Load .erb here or on Route::Orders?
             when 'update'
-                Routes::Orders.update(request) # Check self obj
+                Routes::Orders.update(request) # TODO-fga: Check self obj
             when 'insert'
-                Routes::Orders.insert(request) # Check self obj
+                Routes::Orders.insert(request) # TODO-fga: Check self obj
+
             else
                 erb :default_error
             end
         end
 
-        @@server.error Sinatra::NotFound do
-            redirect to ('/')
-        end
+        # @@server.error Sinatra::NotFound do
+        #     redirect to ('/')
+        # end
 
         @@server.error 400..510 do 
-            redirect to ('/')
+            # redirect to ('/')
+            erb :default_error
         end
     end
 
