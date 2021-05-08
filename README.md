@@ -1,9 +1,13 @@
 # 2021-unicap-bd2-northwind-app-01
 
-How to:
+Install:
+```
+$ gem install bundler
+$ bundle install
+```
 
-gem install bundler
-...
-bundle install
-...
-ruby main.rb
+
+Run: 
+```
+$ ruby main.rb
+```
