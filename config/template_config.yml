@@ -1,0 +1,6 @@
+---
+:PrivateDir: Private
+:ServerPort: 9999
+:Database:
+  :Name: northwind.db
+  :Password: TemplateYourPasswordHere

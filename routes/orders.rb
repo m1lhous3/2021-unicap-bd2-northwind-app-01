@@ -1,5 +1,14 @@
 class Routes
     class Orders
+        def self.getAll(request)
+            request.body.rewind
+            reqBody = JSON.parse request.body.read
+        end
+
+        def self.getOne(request)
+            
+        end
+        
         def self.update(request)
             request.body.rewind
             reqBody = JSON.parse request.body.read
@@ -9,7 +18,7 @@ class Routes
         def self.insert(request)
             request.body.rewind
             reqBody = JSON.parse request.body.read
-            "insert #{reqBody['data']}!"
+            "Insert #{reqBody['data']}!"
         end
     end
 end

@@ -57,5 +57,8 @@ Gemfile.lock
 
 Private
 Private/
+config/config.yml
+/config/config.yml
 test
 teste
+annotations

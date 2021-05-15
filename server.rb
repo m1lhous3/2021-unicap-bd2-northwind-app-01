@@ -26,6 +26,14 @@ class NorthwindServer
             erb :default_index
         end
 
+        @@server.get '/orders/:id' do
+            Routes::Orders.getOne(request)
+        end
+
+        @@server.get '/orders' do
+            Routes::Orders.getAll
+        end
+
         @@server.post '/orders' do
             request.body.rewind  # in case someone already read it
             reqBody = JSON.parse request.body.read
