@@ -1,6 +1,8 @@
 require "sinatra"
 
 require_relative "#{Dir.pwd}/routes/orders.rb"
+require_relative "#{Dir.pwd}/routes/products.rb"
+require_relative "#{Dir.pwd}/routes/customers.rb"
 
 class NorthwindServer
     attr_accessor :port, :server
@@ -26,13 +28,24 @@ class NorthwindServer
             erb :default_index
         end
 
+        @@server.get '/customers' do
+            @allCustomers = Routes::Customers.getAll(request)
+            erb :all_customers
+        end
+
         @@server.get '/orders/:id' do
             Routes::Orders.getOne(request)
         end
 
         @@server.get '/orders' do
             Routes::Orders.getAll
+        end        
+
+        @@server.get '/products' do
+            @allProducts = Routes::Products.getAll(request)
+            erb :all_products
         end
+        
 
         @@server.post '/orders' do
             request.body.rewind  # in case someone already read it
@@ -40,7 +53,6 @@ class NorthwindServer
             action = reqBody['action']
 
             case action.downcase
-                # TODO-fga: Load .erb here or on Route::Orders?
             when 'update'
                 Routes::Orders.update(request) # TODO-fga: Check self obj
             when 'insert'
@@ -51,12 +63,7 @@ class NorthwindServer
             end
         end
 
-        # @@server.error Sinatra::NotFound do
-        #     redirect to ('/')
-        # end
-
         @@server.error 400..510 do 
-            # redirect to ('/')
             erb :default_error
         end
     end

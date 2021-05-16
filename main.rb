@@ -4,7 +4,7 @@ require 'sinatra'
 require 'json'
 require 'yaml'
 require 'base64'
-require 'data_mapper'
+# require 'data_mapper'
 
 require_relative 'server.rb'
 

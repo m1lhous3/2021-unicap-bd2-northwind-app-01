@@ -17,7 +17,7 @@ class Product
         @productName = params.fetch(:productName, "Lorem Ipsum #{@productID}")
         @supplierID = params.fetch(:supplierID, rand(-999999..0))
         @categoryID = params.fetch(:categoryID, rand(-999999..0))
-        @quantityPerUnit = params.fetch(:quantityPerUnit, "")
+        @quantityPerUnit = params.fetch(:quantityPerUnit, ["10 boxes x 20 bags", "24 - 12 oz bottles", "12 - 550 ml bottles", "48 - 6 oz jars", "36 boxes", "18 - 500 g pkgs.", "50 bags x 30 sausgs.", "16 pies", "15 - 300 g rounds"].shuffle.first)
         @unitPrice = params.fetch(:unitPrice, rand.round(2) + rand(0..20))
         @unitsInStock = params.fetch(:unitsInStock, rand(0..200))
         @unitsOnOrder = params.fetch(:unitsOnOrder, 0)
