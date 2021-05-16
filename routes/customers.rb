@@ -1,10 +1,17 @@
 require_relative "#{Dir.pwd}/models/customer.rb"
+# require_relative "#{Dir.pwd}/Private/Database/database.rb"
 
 class Routes
     class Customers
         def self.getAll(request)
             # request.body.rewind
             # reqBody = JSON.parse request.body.read
+
+            @client = Database.client
+            results = client.execute("SELECT CustomerID FROM Customers")
+            results.each do |row|  
+                puts row
+            end  
 
             ## For DBG
             ctmList = []                ## For DBG

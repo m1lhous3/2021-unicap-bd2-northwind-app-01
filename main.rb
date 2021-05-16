@@ -4,9 +4,11 @@ require 'sinatra'
 require 'json'
 require 'yaml'
 require 'base64'
+require 'tiny_tds'
 # require 'data_mapper'
 
 require_relative 'server.rb'
+require_relative 'database.rb'
 
 ## For dbg mode
 require 'pry'
@@ -21,6 +23,7 @@ class NorthwindMain
         # TODO-fga: Integrate with DB
         # @@database = Database.new(params.fetch(:Database, {}))
         @@server = NorthwindServer.new(params.fetch(:ServerPort, 8080))
+        @@database = Database.new()
     end
 
     def init_server
@@ -47,7 +50,7 @@ end
 config = YAML.load_file('config/config.yml')
 
 ntwServer = NorthwindMain.new(config)
-# ntwServer.init_database
+ntwServer.init_database
 # ntwServer.init_server
 
 ntwServer.server_shutdown
