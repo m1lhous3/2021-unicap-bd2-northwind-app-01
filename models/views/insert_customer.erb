@@ -34,59 +34,12 @@
                 <p>
                     <a href="/products" class="btn btn-primary my-2">Lista de Produtos</a>
                     <a href="/customers" class="btn btn-secondary my-2">Lista de Clientes</a>
-                    <a href="/customers/insert" class="btn btn-primary my-2">Inserir Cliente</a>
+                    <a href="/insert/customers" class="btn btn-primary my-2">Inserir Cliente</a>
                     <a href="/orders" class="btn btn-secondary my-2">Lista de Pedidos</a>
                 </p>
             </div>
         </div>
 
-        <div class="row g-5">
-        <div class="col-md-5 col-lg-4 order-md-last">
-            <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">Nome</h6>
-                <small class="text-muted"><%= @oneCustomer.ContactName %></small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">Telefone</h6>
-                <small class="text-muted"><%= @oneCustomer.Phone %></small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">Empresa</h6>
-                <small class="text-muted"><%= @oneCustomer.CompanyName %></small>
-                </div>
-                <%# <span class="text-muted">$5</span> %>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">Endereço</h6>
-                <small class="text-muted"><%= @oneCustomer.Address %></small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">Cidade</h6>
-                <small class="text-muted"><%= @oneCustomer.City %></small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">CEP</h6>
-                <small class="text-muted"><%= @oneCustomer.PostalCode %></small>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <div>
-                <h6 class="my-0">País</h6>
-                <small class="text-muted"><%= @oneCustomer.Country %></small>
-                </div>
-            </li>
-        </div>
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Informações</h4>
                 <div class="row g-3">
