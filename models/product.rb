@@ -1,42 +1,42 @@
 ### Example
 #
-# prodParams = { :productID => 1234 }
+# prodParams = { :ProductID => 1234 }
 # hProd = Product.new(prodParams)
-# hProd.productName
+# hProd.ProductName
 # jProd = hProd.to_json
-# jProd[:productID]
+# jProd[:ProductID]
 #
 ###
 
 require 'json'
 
 class Product
-    attr_accessor :productID, :productName, :supplierID, :categoryID, :quantityPerUnit, :unitPrice, :unitsInStock, :unitsOnOrder, :reorderLevel, :discontinued
+    attr_accessor :ProductID, :ProductName, :SupplierID, :CategoryID, :QuantityPerUnit, :UnitPrice, :UnitsInStock, :UnitsOnOrder, :ReorderLevel, :Discontinued
     def initialize(params = {})
-        @productID = params.fetch(:productID, rand(-999999..0))
-        @productName = params.fetch(:productName, "Lorem Ipsum #{@productID}")
-        @supplierID = params.fetch(:supplierID, rand(-999999..0))
-        @categoryID = params.fetch(:categoryID, rand(-999999..0))
-        @quantityPerUnit = params.fetch(:quantityPerUnit, ["10 boxes x 20 bags", "24 - 12 oz bottles", "12 - 550 ml bottles", "48 - 6 oz jars", "36 boxes", "18 - 500 g pkgs.", "50 bags x 30 sausgs.", "16 pies", "15 - 300 g rounds"].shuffle.first)
-        @unitPrice = params.fetch(:unitPrice, rand.round(2) + rand(0..20))
-        @unitsInStock = params.fetch(:unitsInStock, rand(0..200))
-        @unitsOnOrder = params.fetch(:unitsOnOrder, 0)
-        @reorderLevel = params.fetch(:reorderLevel, 0)
-        @discontinued = params.fetch(:discontinued, 0)
+        @ProductID = params.fetch(:ProductID, rand(-999999..0))
+        @ProductName = params.fetch(:ProductName, "Lorem Ipsum #{@ProductID}")
+        @SupplierID = params.fetch(:SupplierID, rand(-999999..0))
+        @CategoryID = params.fetch(:CategoryID, rand(-999999..0))
+        @QuantityPerUnit = params.fetch(:QuantityPerUnit, ["10 boxes x 20 bags", "24 - 12 oz bottles", "12 - 550 ml bottles", "48 - 6 oz jars", "36 boxes", "18 - 500 g pkgs.", "50 bags x 30 sausgs.", "16 pies", "15 - 300 g rounds"].shuffle.first)
+        @UnitPrice = params.fetch(:UnitPrice, rand.round(2) + rand(0..20))
+        @UnitsInStock = params.fetch(:UnitsInStock, rand(0..200))
+        @UnitsOnOrder = params.fetch(:UnitsOnOrder, 0)
+        @ReorderLevel = params.fetch(:ReorderLevel, 0)
+        @Discontinued = params.fetch(:Discontinued, 0)
     end
 
     def to_json
         { 
-            :productID =>  @productID,
-            :productName => @productName,
-            :supplierID => @supplierID,
-            :categoryID => @categoryID,
-            :quantityPerUnit => @quantityPerUnit,
-            :unitPrice => @unitPrice,
-            :unitsInStock => @unitsInStock,
-            :unitsOnOrder => @unitsOnOrder,
-            :reorderLevel => @reorderLevel,
-            :discontinued => @discontinued
+            :ProductID =>  @ProductID,
+            :ProductName => @ProductName,
+            :SupplierID => @SupplierID,
+            :CategoryID => @CategoryID,
+            :QuantityPerUnit => @QuantityPerUnit,
+            :UnitPrice => @UnitPrice.to_f,
+            :UnitsInStock => @UnitsInStock,
+            :UnitsOnOrder => @UnitsOnOrder,
+            :ReorderLevel => @ReorderLevel,
+            :Discontinued => @Discontinued
         }
     end
 end

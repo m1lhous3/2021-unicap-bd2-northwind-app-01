@@ -62,3 +62,5 @@ config/config.yml
 test
 teste
 annotations
+public/.DS_Store
+/public/.DS_Store

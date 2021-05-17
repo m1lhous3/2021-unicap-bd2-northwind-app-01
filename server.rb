@@ -28,35 +28,64 @@ class NorthwindServer
             erb :default_index
         end
 
+        @@server.get '/products' do
+            @allProducts = Routes::Products.getAll(request)
+            erb :all_products
+        end
+
+        @@server.get '/products/:productID' do
+            @oneProduct = Routes::Products.getOne(self)
+            erb :one_product
+        end
+
         @@server.get '/customers' do
             @allCustomers = Routes::Customers.getAll(request)
             erb :all_customers
         end
 
-        @@server.get '/orders/:id' do
-            Routes::Orders.getOne(request)
+        @@server.get '/customers/:customerID' do
+            @oneCustomer = Routes::Customers.getOne(self)
+            erb :one_customer
         end
 
-        @@server.get '/orders' do
-            Routes::Orders.getAll
-        end        
-
-        @@server.get '/products' do
-            @allProducts = Routes::Products.getAll(request)
-            erb :all_products
-        end
-        
-
-        @@server.post '/orders' do
-            request.body.rewind  # in case someone already read it
+        @@server.post '/customers/:customerID' do
+            request.body.rewind
             reqBody = JSON.parse request.body.read
             action = reqBody['action']
 
             case action.downcase
             when 'update'
-                Routes::Orders.update(request) # TODO-fga: Check self obj
+                Routes::Customers.update(request)
+            when 'delete'
+                Routes::Customers.delete(request)
             when 'insert'
-                Routes::Orders.insert(request) # TODO-fga: Check self obj
+                Routes::Customers.insert(request)
+
+            else
+                erb :default_error
+            end
+        end
+
+        @@server.get '/orders' do
+            @allOrders = Routes::Orders.getAll(request)
+            erb :all_orders
+        end
+
+        @@server.get '/orders/:orderID' do
+            @oneOrder = Routes::Orders.getOne(self)
+            erb :one_order
+        end
+
+        @@server.post '/orders' do
+            request.body.rewind
+            reqBody = JSON.parse request.body.read
+            action = reqBody['action']
+
+            case action.downcase
+            when 'update'
+                Routes::Orders.update(request)
+            when 'insert'
+                Routes::Orders.insert(request)
 
             else
                 erb :default_error

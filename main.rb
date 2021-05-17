@@ -1,11 +1,9 @@
 require 'bundler/setup'
-# require 'NorthwindServer'
 require 'sinatra'
 require 'json'
 require 'yaml'
 require 'base64'
 require 'tiny_tds'
-# require 'data_mapper'
 
 require_relative 'server.rb'
 require_relative 'database.rb'
@@ -19,19 +17,12 @@ class NorthwindMain
 
     def initialize(params = {})
         initialize_directories
-
-        # TODO-fga: Integrate with DB
-        # @@database = Database.new(params.fetch(:Database, {}))
+        @@database = Database.new(params.fetch(:Database, {}))
         @@server = NorthwindServer.new(params.fetch(:ServerPort, 8080))
-        @@database = Database.new()
     end
 
     def init_server
         @@server.run!
-    end
-
-    def init_database
-        @@database.run!
     end
 
     def server_shutdown
@@ -50,7 +41,5 @@ end
 config = YAML.load_file('config/config.yml')
 
 ntwServer = NorthwindMain.new(config)
-ntwServer.init_database
-# ntwServer.init_server
 
 ntwServer.server_shutdown

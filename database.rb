@@ -1,11 +1,15 @@
-require 'tiny_tds'  
+require "sinatra"
 
 class Database
-
     attr_accessor :client
-    
-    def run!
-        config = YAML.load_file('config/config.yml')
-        client = TinyTds::Client.new username: config[:Database][:Username], password: config[:Database][:Password], host: config[:Database][:Host], database: config[:Database][:DatabaseName], port: config[:Database][:DatabasePort]
+
+    def initialize(params = {})
+        @@client = TinyTds::Client.new username: params[:Username], password: params[:Password], host: params[:Host], database: params[:DatabaseName]
+        @@client.query_options[:symbolize_keys] = true
+    end
+
+    def self.executeQuery(query)
+        retQuery = @@client.execute(query)
+        return retQuery
     end
 end

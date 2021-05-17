@@ -3,21 +3,22 @@ require_relative "#{Dir.pwd}/models/product.rb"
 class Routes
     class Products
         def self.getAll(request)
-            # request.body.rewind
-            # reqBody = JSON.parse request.body.read
-
-            ## For DBG
-            prdList = []                ## For DBG
-            for i in 0..9 do            ## For DBG
-                hProd = Product.new     ## For DBG
-                prdList << hProd        ## For DBG
-            end                         ## For DBG
-            return prdList              ## For DBG
-            ## End                      ## For DBG
+            productList = []
+            queryResult = Database.executeQuery("SELECT * FROM Products")
+            queryResult.each do |row|
+                productList << Product.new(row)
+            end
+            return productList
         end
 
         def self.getOne(request)
-            
+            orderID = request.params[:productID]
+
+            query = "select * from Products where Products.ProductID = #{orderID}"
+
+            queryResult = Database.executeQuery(query)
+            oneProduct = Product.new(queryResult.first)
+            return oneProduct
         end
         
         def self.update(request)
