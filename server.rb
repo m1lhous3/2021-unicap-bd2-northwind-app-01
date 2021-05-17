@@ -28,6 +28,10 @@ class NorthwindServer
             erb :default_index
         end
 
+        @@server.get '/report' do
+            erb :report
+        end
+
         @@server.get '/products' do
             @allProducts = Routes::Products.getAll(request)
             erb :all_products
@@ -48,22 +52,31 @@ class NorthwindServer
             erb :one_customer
         end
 
-        @@server.post '/customers/:customerID' do
-            request.body.rewind
-            reqBody = JSON.parse request.body.read
-            action = reqBody['action']
+        @@server.get '/edit/customers/:customerID' do
+            @oneCustomer = Routes::Customers.getOne(self)
+            erb :edit_customer
+        end
 
-            case action.downcase
-            when 'update'
-                Routes::Customers.update(request)
-            when 'delete'
-                Routes::Customers.delete(request)
-            when 'insert'
-                Routes::Customers.insert(request)
+        @@server.post '/edit/customers/:customerID' do
+            Routes::Customers.update(request)
+            redirect '/customers/update/success'
+        end
 
-            else
-                erb :default_error
-            end
+        @@server.get '/insert/customers' do
+            erb :insert_customer
+        end
+
+        @@server.post '/insert/customers' do
+            Routes::Customers.insert(request)
+            redirect '/customers/insert/success'
+        end
+
+        @@server.get '/customers/update/success' do
+            erb :success_customer_update
+        end
+
+        @@server.get '/customers/insert/success' do
+            erb :success_customer_insert
         end
 
         @@server.get '/orders' do

@@ -71,14 +71,12 @@ class Routes
         
         def self.update(request)
             request.body.rewind
-            reqBody = JSON.parse request.body.read
-            "Update #{reqBody['data']}!"
+            reqBody = JSON.parse(request.body.read, :symbolize_names => true)
         end
     
         def self.insert(request)
             request.body.rewind
-            reqBody = JSON.parse request.body.read
-            "Insert #{reqBody['data']}!"
+            reqBody = JSON.parse(request.body.read, :symbolize_names => true)
         end
     end
 end

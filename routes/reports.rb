@@ -1,7 +1,5 @@
-require_relative "#{Dir.pwd}/models/product.rb"
-
 class Routes
-    class Products
+    class Reports
         def self.getAll(request)
             productList = []
             queryResult = Database.executeQuery("SELECT * FROM Products")
@@ -32,5 +30,3 @@ class Routes
         end
     end
 end
-
-
