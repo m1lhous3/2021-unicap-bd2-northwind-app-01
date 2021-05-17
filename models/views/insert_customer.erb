@@ -30,7 +30,7 @@
     <main>
         <div class="py-5 text-center">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Cliente <%= @oneCustomer.CustomerID %></h1>
+                <h1 class="fw-light">Inserir Cliente</h1>
                 <p>
                     <a href="/products" class="btn btn-primary my-2">Lista de Produtos</a>
                     <a href="/customers" class="btn btn-secondary my-2">Lista de Clientes</a>
@@ -88,8 +88,7 @@
             </li>
         </div>
         <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">Edição de informações</h4>
-            <input type="hidden" class="form-control" id="CustomerID" value='<%= @oneCustomer.CustomerID %>'>
+            <h4 class="mb-3">Informações</h4>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="firstName" class="form-label">Nome</label>
@@ -126,7 +125,7 @@
                         <input type="text" class="form-control" id="PostalCode" placeholder="" required="">
                     </div>
                     <div class="btn-group">
-                        <button type="submit" onclick="editCustomer()" id="btn-send-data" class="w-100 btn btn-primary btn-lg">Salvar alteração</button>
+                        <button type="submit" onclick="insertCustomer()" id="btn-send-data" class="w-100 btn btn-primary btn-lg">Salvar alteração</button>
                     </div>
                 </div>
             </div>
