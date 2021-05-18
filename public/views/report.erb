@@ -30,7 +30,7 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Sucesso ao inserir o cliente</h1>
+                    <h1 class="fw-light">Relatorio de Pedidos</h1>
                     <p>
                         <a href="/products" class="btn btn-primary my-2">Lista de Produtos</a>
                         <a href="/customers" class="btn btn-secondary my-2">Lista de Clientes</a>
@@ -41,6 +41,36 @@
                 </div>
             </div>
         </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome do Cliente</th>
+                            <th scope="col">Colaborador/Vendedor</th>
+                            <th scope="col">Valor Total do Pedido (R$)</th>
+                            <th scope="col">Data de Compra</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @allOrdersReports.each do |orderReport| %>
+                            <tr>
+                                <th scope="row"><a href="/orders/<%= orderReport[:OrderID] %>"><%= orderReport[:OrderID] %></th>
+                                <td><a href="/customers/<%= orderReport[:CustomerID] %>"><%= orderReport[:CustomerName] %></td>
+                                <td><%= orderReport[:NomeColaborador] %></td>
+                                <td>R$ <%= orderReport[:TotalOrderValue].round(2) %></td>
+                                <td><%= orderReport[:DataOrder] %></td>
+                            </tr>
+                            <% end %>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script src="/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
