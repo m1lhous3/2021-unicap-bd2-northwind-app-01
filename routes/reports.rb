@@ -1,32 +1,14 @@
 class Routes
     class Reports
-        def self.getAll(request)
-            productList = []
-            queryResult = Database.executeQuery("SELECT * FROM Products")
-            queryResult.each do |row|
-                productList << Product.new(row)
-            end
-            return productList
-        end
-
-        def self.getOne(request)
-            orderID = request.params[:productID]
-
-            query = "select * from Products where Products.ProductID = #{orderID}"
-
+        def self.getOrdersReport(request)
+            reportList = []
+            query = "EXEC report_orders"
             queryResult = Database.executeQuery(query)
-            oneProduct = Product.new(queryResult.first)
-            return oneProduct
-        end
-        
-        def self.update(request)
-            request.body.rewind
-            reqBody = JSON.parse(request.body.read, :symbolize_names => true)
-        end
-    
-        def self.insert(request)
-            request.body.rewind
-            reqBody = JSON.parse(request.body.read, :symbolize_names => true)
+            
+            queryResult.each do |row|
+                reportList << row
+            end
+            return reportList
         end
     end
 end

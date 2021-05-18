@@ -36,10 +36,7 @@ class Routes
         end
 
         def self.delete(request)
-            request.body.rewind
-            reqBody = JSON.parse(request.body.read, :symbolize_names => true)
-
-            query = "DELETE FROM Customers WHERE CustomerID='#{reqBody["CustomerID"]}'"
+            query = "DELETE FROM Customers WHERE CustomerID='#{request.params["customerID"]}'"
 
             queryResult = Database.executeQuery(query)
         end

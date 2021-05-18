@@ -1,6 +1,7 @@
 require "sinatra"
 
 require_relative "#{Dir.pwd}/routes/orders.rb"
+require_relative "#{Dir.pwd}/routes/reports.rb"
 require_relative "#{Dir.pwd}/routes/products.rb"
 require_relative "#{Dir.pwd}/routes/customers.rb"
 
@@ -29,6 +30,7 @@ class NorthwindServer
         end
 
         @@server.get '/report' do
+            @allOrdersReports = Routes::Reports.getOrdersReport(request)
             erb :report
         end
 
@@ -69,6 +71,11 @@ class NorthwindServer
         @@server.post '/insert/customers' do
             Routes::Customers.insert(request)
             redirect '/customers/insert/success'
+        end
+
+        @@server.get '/delete/customers/:customerID' do
+            Routes::Customers.delete(self)
+            erb :success_customer_delete
         end
 
         @@server.get '/customers/update/success' do
